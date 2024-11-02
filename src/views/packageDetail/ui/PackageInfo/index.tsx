@@ -4,7 +4,7 @@ import Dust from "@/src/shared/ui/Dust";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 
-const PackageInfo = () => {
+const PackageInfo = ({ data }:PackageInfoProps ) => {
     const containerRef = useRef(null);
     const cardRef = useRef(null);
     const shadowRef = useRef<HTMLDivElement | null>(null);
@@ -64,10 +64,10 @@ const PackageInfo = () => {
                     >
                         {/* info start */}
                         <div className=' z-[3] px-5 py-2 flex flex-col items-center justify-center gap-2 w-full top-4'>
-                            <p className='text-khaki text-2xl font-bold mt-6'>یک ماهه</p>
+                            <p className='text-khaki text-2xl font-bold mt-6'>{data.title}</p>
                             <ul className='w-full'>
                                 {
-                                    packageItems[0].items.map((item: string, index: number) => (
+                                    data.items.map((item: string, index: number) => (
                                         <li key={index} className='text-black flex items-center justify-between py-1 gap-2 px-2'>
                                             <p className='text-xs lg:text-sm whitespace-nowrap '>{item}</p>
                                             <span className='flex-auto h-2 border-t border-dashed border-[#77A48E]'></span>
@@ -79,7 +79,7 @@ const PackageInfo = () => {
                             </ul>
                             <div className='flex justify-center items-center   px-4 mt-1 bg-spotify-dark rounded-2xl'>
                                 <p className='text-white text-lg font-semibold '>
-                                    2000
+                                {data.price}
                                     <span className='text-sm mr-1 font-light '>تومان</span>
                                 </p>
                             </div>
