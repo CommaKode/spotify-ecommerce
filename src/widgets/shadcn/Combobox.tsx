@@ -3,15 +3,12 @@
 import * as React from "react"
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import { CircleChevronDown } from 'lucide-react';
-
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/src/shared/ui/Button/button"
 import {
     Command,
     CommandEmpty,
     CommandGroup,
-    CommandInput,
     CommandItem,
     CommandList,
 } from "@/src/widgets/shadcn/command"
@@ -20,25 +17,28 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/src/widgets/shadcn/popover"
+import { UseFormRegister } from "react-hook-form"; 
 
 interface ComboProps {
     items: ComboItem[]
+    register: UseFormRegister<any>; 
+    name: string; 
 }
- type ComboItem =  {
+
+type ComboItem = {
     value: string;
     label: string;
 }
 
-export function Combobox(props: ComboProps) {
-    const { items } = props;
-
+export function Combobox({ items, register, name }: ComboProps) {
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
+    const [value, setValue] = React.useState<string>("")
 
     return (
-        <Popover open={open} onOpenChange={setOpen} >
+        <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button
+                    {...register(name)} 
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
@@ -47,22 +47,22 @@ export function Combobox(props: ComboProps) {
                     {value
                         ? items.find((item) => item.value === value)?.label
                         : "انتخاب کنید..."}
-                    <CircleChevronDown className="ml-2 "  />
+                    <CircleChevronDown className="ml-2 " />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="bg-black p-0">
                 <Command className="bg-black">
-                    {/* <CommandInput placeholder="Search item..." className="h-9" /> */}
-                    <CommandList >
+                    <CommandList>
                         <CommandEmpty>No item found.</CommandEmpty>
-                        <CommandGroup >
+                        <CommandGroup>
                             {items.map((item) => (
                                 <CommandItem
                                     key={item.value}
                                     value={item.value}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
-                                        setOpen(false)
+                                        const newValue = currentValue === value ? "" : currentValue;
+                                        setValue(newValue); 
+                                        setOpen(false);
                                     }}
                                     className="text-white cursor-pointer"
                                 >
