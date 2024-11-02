@@ -1,5 +1,5 @@
 'use client'
-import { packageItems } from "@/src/features/home/constants";
+import { packageItems } from "@/src/entities/package/constants";
 import Dust from "@/src/shared/ui/Dust";
 import Link from "next/link";
 import React, { useRef, useState } from "react";

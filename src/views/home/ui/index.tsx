@@ -1,4 +1,4 @@
-import { faqItems, packageItems, serviceItems } from '@/src/features/home/constants';
+import { faqItems, serviceItems } from '@/src/features/home/constants';
 import React from 'react'
 import ServiceCard from './ServiceCard';
 import Package from './Package';
@@ -11,6 +11,7 @@ import Link from 'next/link';
 import LinkIcon from './icons/LinkIcon';
 import Dogs from './icons/Dogs';
 import MobileLightSpot from './icons/MobileLightSpot';
+import { packageItems } from '@/src/entities/package/constants';
 
 export const Home = () => {
   return (
