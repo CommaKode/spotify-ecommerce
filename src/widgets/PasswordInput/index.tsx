@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import { Input } from '@/src/shared/ui/Input'
 import { Button } from '@/src/shared/ui/Button/button'
 import EyeOff from './icons/EyeOff'
 import EyeOn from './icons/EyeOn'
 
-export default function PasswordInput() {
+const PasswordInput = forwardRef(({...props}, ref) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const togglePasswordVisibility = () => {
@@ -14,11 +14,12 @@ export default function PasswordInput() {
   }
 
   return (
-    <div className="flex  w-full max-w-sm items-center space-x-2">
-      <div className="relative w-full ">
+    <div className="flex w-full max-w-sm items-center space-x-2">
+      <div className="relative w-full">
         <Input
           type={showPassword ? "text" : "password"}
           placeholder="*************"
+          {...props} 
         />
         <Button
           type="button"
@@ -37,4 +38,8 @@ export default function PasswordInput() {
       </div>
     </div>
   )
-}
+})
+
+PasswordInput.displayName = "PasswordInput"; // Set display name for debugging
+
+export default PasswordInput;
